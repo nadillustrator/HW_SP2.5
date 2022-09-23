@@ -7,59 +7,58 @@ import pro.sky.courseworkrewright.exceptions.EmployeeAlreadyAddException;
 import pro.sky.courseworkrewright.exceptions.EmployeeNotFoundException;
 import pro.sky.courseworkrewright.exceptions.EmployeeStorageIsFullException;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 @Service
 public class EmployeeService {
-    private static int size;
+    private static int size = 10;
 
-    private final Employee[] employees;
+    private final List<Employee> employees;
 
     public static int getSize() {
         return size;
     }
 
     public EmployeeService() {
-        this.employees = new Employee[10];
+        this.employees = new ArrayList<>();
     }
     
     public Employee addEmployee(String name, String surname) {
-        if (size >= employees.length) {
+        Employee newEmployee = new Employee(name,surname);
+        if (size <= employees.size()) {
             throw new EmployeeStorageIsFullException();
         }
-        Employee newEmployee = new Employee(name,surname);
-        for (int i = 0; i < employees.length; i++) {
-            if(newEmployee.equals(employees[i])) {
-                throw new EmployeeAlreadyAddException();
-            }
+        if (employees.contains(newEmployee)){
+            throw new EmployeeAlreadyAddException();
         }
-        employees[size++] = newEmployee;
+        employees.add(newEmployee);
         return newEmployee;
     }
 
     public Employee removeEmployee(String name, String surname){
         Employee newEmployee = new Employee(name, surname);
-        for (int i = 0; i < size; i++) {
-            if(newEmployee.equals(employees[i])){
-                System.out.println("Employee " + employees[i].getName() + employees[i].getSurname() + " is removed.");
-                System.arraycopy(employees, i + 1, employees, i, size - i - 1);
-                employees[size - 1] = null;
-                size--;
-                return newEmployee;
-            }
+        if(employees.contains(newEmployee)){
+            employees.remove(newEmployee);
+            System.out.println("Employee "+ newEmployee.getName() + newEmployee.getSurname() +" is removed.");
+            return newEmployee;
         }
         throw new EmployeeNotFoundException();
     }
 
     public Employee findEmployee(String name, String surname){
         Employee newEmployee = new Employee(name, surname);
-        for (int i = 0; i < size; i++) {
-            if(newEmployee.equals(employees[i])){
-                System.out.println("Employee " + employees[i].getName() + employees[i].getSurname() + " found.");
+            if(employees.contains(newEmployee)){
+                System.out.println("Employee " + newEmployee.getName() + newEmployee.getSurname() + " found.");
                 return newEmployee;
             }
-        }
+
         throw new EmployeeNotFoundException();
+    }
+
+    public List<Employee> showEmployees(){
+        return new ArrayList<>(employees);
     }
 
 }

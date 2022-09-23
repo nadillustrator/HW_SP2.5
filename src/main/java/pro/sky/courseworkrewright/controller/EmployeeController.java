@@ -7,6 +7,9 @@ import org.springframework.web.bind.annotation.RestController;
 import pro.sky.courseworkrewright.employees.Employee;
 import pro.sky.courseworkrewright.service.EmployeeService;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RestController
 @RequestMapping("/employee")
 public class EmployeeController {
@@ -41,6 +44,12 @@ public class EmployeeController {
     @GetMapping("/size")
     public int getSize(){
         return EmployeeService.getSize();
+    }
+
+    @GetMapping("/showEmployees")
+    public List<Employee> showEmployees(){
+       List<Employee> employees = employeeService.showEmployees();
+       return employees;
     }
 
 }
