@@ -1,0 +1,29 @@
+//Add emloyee
+GET http://localhost:8080/employee/add?firstName=Ivan&lastName=Ivanov
+
+###
+GET http://localhost:8080/employee/add?firstName=Ivan&lastName=Popov
+
+###
+GET http://localhost:8080/employee/add?firstName=Ivan&lastName=Sidorov
+
+###
+GET http://localhost:8080/employee/add?firstName=Ruslan&lastName=Sidorov
+
+###
+GET http://localhost:8080/employee/add?firstName=Petr&lastName=Petrov
+
+###
+GET http://localhost:8080/employee/add?firstName=Oleg&lastName=Makarov
+
+//Find employee
+###
+GET http://localhost:8080/employee/find?firstName=Ivan&lastName=Ivanov
+
+//Remove employee
+###
+GET http://localhost:8080/employee/remove?firstName=Ivan&lastName=Ivanov
+
+//Show all employees
+###
+GET http://localhost:8080/employee/showEmployees
