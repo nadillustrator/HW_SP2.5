@@ -1,10 +1,10 @@
 package pro.sky.courseworkrewright.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pro.sky.courseworkrewright.employees.Employee;
+import pro.sky.courseworkrewright.exceptions.EmployeeAlreadyAddException;
+import pro.sky.courseworkrewright.exceptions.EmployeeNotFoundException;
+import pro.sky.courseworkrewright.exceptions.EmployeeStorageIsFullException;
 import pro.sky.courseworkrewright.service.EmployeeService;
 
 import java.util.ArrayList;
@@ -50,6 +50,21 @@ public class EmployeeController {
     public List<Employee> showEmployees(){
        List<Employee> employees = employeeService.showEmployees();
        return employees;
+    }
+
+    @ExceptionHandler
+    public String handleEmployeeNotFoundException(EmployeeNotFoundException e){
+        return "Employee not found.";
+    }
+
+    @ExceptionHandler
+    public String handleEmployeeAlreadyAddException(EmployeeAlreadyAddException e){
+        return "Employee already added.";
+    }
+
+    @ExceptionHandler
+    public String handleEmployeeStorageIsFullException(EmployeeStorageIsFullException e){
+        return "Employee storage is full.Вы не можете добавить сотрудника.";
     }
 
 }
