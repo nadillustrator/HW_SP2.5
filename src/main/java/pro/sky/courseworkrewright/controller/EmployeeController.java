@@ -7,8 +7,7 @@ import pro.sky.courseworkrewright.exceptions.EmployeeNotFoundException;
 import pro.sky.courseworkrewright.exceptions.EmployeeStorageIsFullException;
 import pro.sky.courseworkrewright.service.EmployeeService;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/employee")
@@ -47,8 +46,8 @@ public class EmployeeController {
     }
 
     @GetMapping("/showEmployees")
-    public List<Employee> showEmployees(){
-       List<Employee> employees = employeeService.showEmployees();
+    public Map<String, Employee> showEmployees(){
+       Map<String, Employee> employees = employeeService.showEmployees();
        return employees;
     }
 

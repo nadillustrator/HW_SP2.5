@@ -43,4 +43,8 @@ public class Employee { //dataclass
     public int hashCode() {
         return Objects.hash(name, surname);
     }
+
+    public String  getFullName() {
+        return this.surname + " " + this.name;
+    }
 }
