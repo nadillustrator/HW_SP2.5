@@ -7,12 +7,14 @@ import pro.sky.courseworkrewright.exceptions.EmployeeNotFoundException;
 import pro.sky.courseworkrewright.exceptions.EmployeeStorageIsFullException;
 import pro.sky.courseworkrewright.service.EmployeeService;
 
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Stream;
 
 @RestController
 @RequestMapping("/employee")
 public class EmployeeController {
-    
+
     private final EmployeeService employeeService;
 
 
@@ -26,18 +28,27 @@ public class EmployeeController {
     }
 
     @GetMapping("/add")
-    public Employee addEmployee(@RequestParam String firstName, @RequestParam String lastName){
-        return employeeService.addEmployee(firstName, lastName);
+    public Employee addEmployee(@RequestParam("firstName") String name,
+                                @RequestParam("lastName") String surname,
+                                @RequestParam int salary,
+                                @RequestParam int departmentId){
+        return employeeService.addEmployee(name, surname,salary,departmentId);
     }
 
     @GetMapping("/remove")
-    public Employee removeEmployee(@RequestParam String firstName, @RequestParam String lastName){
-       return employeeService.removeEmployee(firstName, lastName);
+    public Employee removeEmployee(@RequestParam("firstName") String name,
+                                   @RequestParam("lastName") String surname,
+                                   @RequestParam int salary,
+                                   @RequestParam int departmentId){
+        return employeeService.removeEmployee(name, surname,salary,departmentId);
     }
 
     @GetMapping("/find")
-    public Employee findEmployee(@RequestParam String firstName, @RequestParam String lastName){
-        return employeeService.findEmployee(firstName, lastName);
+    public Employee findEmployee(@RequestParam("firstName") String name,
+                                 @RequestParam("lastName") String surname,
+                                 @RequestParam int salary,
+                                 @RequestParam int departmentId){
+        return employeeService.findEmployee(name, surname,salary,departmentId);
     }
 
     @GetMapping("/size")
@@ -46,9 +57,8 @@ public class EmployeeController {
     }
 
     @GetMapping("/showEmployees")
-    public Map<String, Employee> showEmployees(){
-       Map<String, Employee> employees = employeeService.showEmployees();
-       return employees;
+    public List<Employee> showEmployees(){
+        return employeeService.getAll();
     }
 
     @ExceptionHandler

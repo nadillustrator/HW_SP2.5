@@ -1,30 +1,30 @@
 package pro.sky.courseworkrewright.service;
 
 import org.springframework.stereotype.Service;
+import pro.sky.courseworkrewright.controller.EmployeeController;
 import pro.sky.courseworkrewright.employees.Employee;
 import pro.sky.courseworkrewright.exceptions.EmployeeAlreadyAddException;
 import pro.sky.courseworkrewright.exceptions.EmployeeNotFoundException;
 import pro.sky.courseworkrewright.exceptions.EmployeeStorageIsFullException;
 
 import java.util.*;
-
+import java.util.stream.Stream;
 
 @Service
 public class EmployeeService {
-    private static int size = 10;
+    private static int size = 40;
 
-    private final Map<String, Employee> employees;
+    private final Map<String, Employee> employees = new HashMap<>();
+
+
 
     public static int getSize() {
         return size;
     }
 
-    public EmployeeService() {
-        this.employees = new HashMap<>();
-    }
 
-    public Employee addEmployee(String name, String surname) {
-        Employee newEmployee = new Employee(name, surname);
+    public Employee addEmployee(String name, String surname, int salary, int departmentId) {
+        Employee newEmployee = new Employee(name, surname, salary, departmentId);
         if (size <= employees.size()) {
             throw new EmployeeStorageIsFullException();
         }
@@ -35,8 +35,8 @@ public class EmployeeService {
         return newEmployee;
     }
 
-    public Employee removeEmployee(String name, String surname) {
-        Employee newEmployee = new Employee(name, surname);
+    public Employee removeEmployee(String name, String surname, int salary, int departmentId) {
+        Employee newEmployee = new Employee(name, surname, salary, departmentId);
         if (employees.containsKey(newEmployee.getFullName())) {
             System.out.println("Employee " + newEmployee.getFullName() + " is removed.");
             return employees.remove(newEmployee.getFullName());
@@ -44,8 +44,8 @@ public class EmployeeService {
         throw new EmployeeNotFoundException();
     }
 
-    public Employee findEmployee(String name, String surname) {
-        Employee newEmployee = new Employee(name, surname);
+    public Employee findEmployee(String name, String surname, int salary, int departmentId) {
+        Employee newEmployee = new Employee(name, surname, salary, departmentId);
         if (employees.containsKey(newEmployee.getFullName())) {
             System.out.println("Employee " + newEmployee.getFullName() + " found.");
             return newEmployee;
@@ -54,9 +54,9 @@ public class EmployeeService {
         throw new EmployeeNotFoundException();
     }
 
-    public HashMap<String, Employee> showEmployees() {
-        return new HashMap<>(employees);
+    public List <Employee> getAll(){
+        return new ArrayList<>(employees.values());
     }
 
-}
 
+}
