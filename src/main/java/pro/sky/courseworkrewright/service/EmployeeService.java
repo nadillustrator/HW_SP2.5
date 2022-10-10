@@ -1,30 +1,27 @@
 package pro.sky.courseworkrewright.service;
 
 import org.springframework.stereotype.Service;
-import pro.sky.courseworkrewright.controller.EmployeeController;
 import pro.sky.courseworkrewright.employees.Employee;
 import pro.sky.courseworkrewright.exceptions.EmployeeAlreadyAddException;
 import pro.sky.courseworkrewright.exceptions.EmployeeNotFoundException;
 import pro.sky.courseworkrewright.exceptions.EmployeeStorageIsFullException;
 
 import java.util.*;
-import java.util.stream.Stream;
 
 @Service
 public class EmployeeService {
     private static int size = 40;
-
     private final Map<String, Employee> employees = new HashMap<>();
-
-
-
-    public static int getSize() {
-        return size;
-    }
+    private final ValidatorService validator = new ValidatorService();
 
 
     public Employee addEmployee(String name, String surname, int salary, int departmentId) {
-        Employee newEmployee = new Employee(name, surname, salary, departmentId);
+        Employee newEmployee = new Employee(
+                validator.validate(name),
+                validator.validate(surname),
+                salary,
+                departmentId
+        );
         if (size <= employees.size()) {
             throw new EmployeeStorageIsFullException();
         }
@@ -58,5 +55,8 @@ public class EmployeeService {
         return new ArrayList<>(employees.values());
     }
 
+    public static int getSize() {
+        return size;
+    }
 
 }

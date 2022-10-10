@@ -15,6 +15,12 @@ GET http://localhost:8080/employee/add?firstName=Petr&lastName=Petrov&salary=758
 
 ###
 GET http://localhost:8080/employee/add?firstName=Oleg&lastName=Makarov&salary=47950&departmentId=3
+//                                        Double surname
+###
+GET http://localhost:8080/employee/add?firstName=Nikolay&lastName=Prohorov-Karpenko&salary=78000&departmentId=3
+//                                        Double name
+###
+GET http://localhost:8080/employee/add?firstName=Adrian-Anatoly&lastName=Rudko&salary=63900&departmentId=1
 
 //Find employee
 ###
