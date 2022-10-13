@@ -22,7 +22,7 @@ public class DepartmentService {
     public Employee findEmployeeWithMaxSalaryFromDepartment(int department) {
         return employeeService.getAll().stream()
                 .filter(employee -> employee.getDepartmentId() == department)
-                .max((o1, o2) -> o1.getSalary() - o2.getSalary())
+                .max(Comparator.comparing(Employee::getSalary))
                 .orElseThrow(EmployeeNotFoundException::new);
 
     }
@@ -40,7 +40,7 @@ public class DepartmentService {
                 .collect(Collectors.toList());
     }
 
-    public Map<Integer, List<Employee>> findEmployees() {
+    public Map<Integer, List<Employee>> sortEmployeesByDepartment() {
         return employeeService.getAll().stream()
                 .collect(Collectors.groupingBy(Employee::getDepartmentId));
     }

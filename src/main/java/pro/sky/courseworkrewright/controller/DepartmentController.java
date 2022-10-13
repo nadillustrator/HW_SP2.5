@@ -8,7 +8,6 @@ import pro.sky.courseworkrewright.employees.Employee;
 import pro.sky.courseworkrewright.service.DepartmentService;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -39,6 +38,6 @@ public class DepartmentController {
 
     @GetMapping("/all")
     public Map<Integer, List<Employee>> findEmployees(){
-        return departmentService.findEmployees();
+        return departmentService.sortEmployeesByDepartment();
     }
 }

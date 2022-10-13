@@ -10,10 +10,13 @@ import java.util.*;
 
 @Service
 public class EmployeeService {
-    private static int size = 40;
+    private static int size = 10;
     private final Map<String, Employee> employees = new HashMap<>();
-    private final ValidatorService validator = new ValidatorService();
+    private final ValidatorService validator;
 
+    public EmployeeService(ValidatorService validator) {
+        this.validator = validator;
+    }
 
     public Employee addEmployee(String name, String surname, int salary, int departmentId) {
         Employee newEmployee = new Employee(
@@ -51,7 +54,7 @@ public class EmployeeService {
         throw new EmployeeNotFoundException();
     }
 
-    public List <Employee> getAll(){
+    public List<Employee> getAll() {
         return new ArrayList<>(employees.values());
     }
 
