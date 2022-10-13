@@ -2,9 +2,6 @@ package pro.sky.courseworkrewright.service;
 
 import pro.sky.courseworkrewright.employees.Employee;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class TestConstants {
 
 

@@ -11,12 +11,9 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import pro.sky.courseworkrewright.employees.Employee;
 import pro.sky.courseworkrewright.exceptions.EmployeeNotFoundException;
-
 import java.util.*;
 import java.util.stream.Stream;
-
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 import static pro.sky.courseworkrewright.service.TestConstants.*;
 
